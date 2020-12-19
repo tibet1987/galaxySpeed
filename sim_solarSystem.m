@@ -8,6 +8,7 @@ addpath functions
 
 
     %% drawing different Kepler orbits
+    close all
     phi = linspace(0,2*pi,100); % linear true anomaly
     a = 1;
     e = 0;
@@ -21,7 +22,7 @@ addpath functions
     
     %% movement of bodies on Kepler orbits
     close all
-    phi = linspace(0,2*pi,20);
+    phi = linspace(0,2*pi,21);
     a = 1;
     e = 0.8;
     r = calcKeplerRadius(phi,a,e);

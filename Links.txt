@@ -1,0 +1,7 @@
+https://en.wikipedia.org/wiki/Two-body_problem
+	-> COM dynamics
+	-> animation of two bodies
+
+https://en.wikipedia.org/wiki/Kepler_orbit
+	-> explanation of r(phi) = a*(1-e^2)./(1+e*cos(phi));
+	-> 
