@@ -6,20 +6,18 @@ addpath functions
 
 %% understanding Kepler movement
 
+
     %% drawing different Kepler orbits
-    phi = linspace(0,2*pi,100);
+    phi = linspace(0,2*pi,100); % linear true anomaly
     a = 1;
     e = 0;
     plot(0,0,'.','MarkerSize',20); hold all;
+    [r] = calcKeplerRadius(phi,a,e);
+    [x,y] = pol2cart(phi,r);
+    plot(x,y)
+    axis equal
+    hold all
 
-    for e=0:0.1:0.9
-        r = calcKeplerRadius(phi,a,e);
-
-        [x,y] = pol2cart(phi,r);
-        plot(x,y)
-        axis equal
-        hold all
-    end
     
     %% movement of bodies on Kepler orbits
     close all
