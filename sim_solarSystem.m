@@ -22,7 +22,9 @@ addpath functions
     
     %% movement of bodies on Kepler orbits
     close all
-    phi = linspace(0,2*pi,21);
+%     phi = linspace(0,2*pi,21);
+    N = 100;
+    [phi] = calcEquichronousAngleSlices(N,a,M,G)
     a = 1;
     e = 0.8;
     r = calcKeplerRadius(phi,a,e);
