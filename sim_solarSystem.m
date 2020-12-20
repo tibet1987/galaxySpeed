@@ -39,8 +39,6 @@ T_sample = 24*3600; % 1 day
 
 sim('twoBodySim')
 
-%%
-close all
 plotTwoBodySimResults(r1,r2,'size1',30,'size2',18,'plotTrail',1,...
                             'timeScale',T_sample*20)
 
