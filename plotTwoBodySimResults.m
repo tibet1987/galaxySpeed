@@ -31,7 +31,7 @@ for k=1:2:nargin-2
 
 end
 
-figure('color','k','position',[2    42   958   954])
+figure('color',0.1*[1,1,1],'position',[2    42   958   954])
 
 % plot initial bodies dots
 p1 = plot(r1.Data(1,1),r1.Data(1,2),'.r','MarkerSize',size1);
@@ -45,13 +45,11 @@ drawnow
 
 set(gca,'color','k')
 plotScale = 1.1;
-xmin = min([r1.Data(:,1);r2.Data(:,1)]) * plotScale;
-xmax = max([r1.Data(:,1);r2.Data(:,1)]) * plotScale;
-ymin = min([r1.Data(:,2);r2.Data(:,2)]) * plotScale;
-ymax = max([r1.Data(:,2);r2.Data(:,2)]) * plotScale;
+xmin = min([r1.Data(:,1);r2.Data(:,1);r1.Data(:,2);r2.Data(:,2)]) * plotScale;
+xmax = max([r1.Data(:,1);r2.Data(:,1);r1.Data(:,2);r2.Data(:,2)]) * plotScale;
 axis equal
 xlim([xmin,xmax])
-ylim([ymin,ymax])
+ylim([xmin,xmax])
 timeDiff = (r1.Time(2)-r1.Time(1)) / timeScale;
 
 for k=2:numel(r1.Time)-1
