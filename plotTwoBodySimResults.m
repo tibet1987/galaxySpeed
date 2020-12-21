@@ -35,15 +35,17 @@ for k=1:2:nargin-2
 end
 
 figure('color',0.1*[1,1,1],'position',[2    42   958   954])
-
+% plot body trail first such that it's always in the background
+if plotTrail
+    trail1 = plot(r1.Data(1,1),r1.Data(1,2),'-r','lineWidth',0.5');
+    hold all
+    trail2 = plot(r2.Data(1,1),r2.Data(1,2),'-w','lineWidth',0.5');
+end
 % plot initial bodies dots
 p1 = plot(r1.Data(1,1),r1.Data(1,2),'.r','MarkerSize',size1);
 hold all
 p2 = plot(r2.Data(1,1),r2.Data(1,2),'.w','MarkerSize',size2);
-if plotTrail
-    trail1 = plot(r1.Data(1,1),r1.Data(1,2),'-r','lineWidth',0.5');
-    trail2 = plot(r2.Data(1,1),r2.Data(1,2),'-w','lineWidth',0.5');
-end
+
 drawnow
 
 set(gca,'color','k')
@@ -56,8 +58,6 @@ timeDiff = (r1.Time(2)-r1.Time(1)) / timeScale;
 
 for k=2:numel(r1.Time)-1
     pause( timeDiff );
-    set(p1,'XData',r1.Data(k,1),'YData',r1.Data(k,2));
-    set(p2,'XData',r2.Data(k,1),'YData',r2.Data(k,2));
     if plotTrail
         if k<=trailLength+1
             set(trail1,'XData',r1.Data(1:k,1),'YData',r1.Data(1:k,2));
@@ -67,6 +67,9 @@ for k=2:numel(r1.Time)-1
             set(trail2,'XData',r2.Data(k-trailLength:k,1),'YData',r2.Data(k-trailLength:k,2));
         end
     end
+    set(p1,'XData',r1.Data(k,1),'YData',r1.Data(k,2));
+    set(p2,'XData',r2.Data(k,1),'YData',r2.Data(k,2));
+
     drawnow
 end
 
