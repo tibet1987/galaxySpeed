@@ -18,6 +18,7 @@ size2 = 15;
 timeScale = 24*3600*100;
 reps = 0;
 useNewFigure = 1;
+trailLength = numel(r1.Data(:,1));
 for k=1:2:nargin-2
     if strcmpi(varargin{k},'size1')
         size1 = varargin{k+1};
@@ -27,6 +28,8 @@ for k=1:2:nargin-2
         timeScale = varargin{k+1};
     elseif strcmpi(varargin{k},'plotTrail')
         plotTrail = varargin{k+1};
+    elseif strcmpi(varargin{k},'trailLength')
+        trailLength = varargin{k+1};
     end        
 
 end
@@ -45,11 +48,10 @@ drawnow
 
 set(gca,'color','k')
 plotScale = 1.1;
-xmin = min([r1.Data(:,1);r2.Data(:,1);r1.Data(:,2);r2.Data(:,2)]) * plotScale;
-xmax = max([r1.Data(:,1);r2.Data(:,1);r1.Data(:,2);r2.Data(:,2)]) * plotScale;
+maxVal = max(abs([r1.Data(:,1);r2.Data(:,1);r1.Data(:,2);r2.Data(:,2)])) * plotScale;
 axis equal
-xlim([xmin,xmax])
-ylim([xmin,xmax])
+xlim([-maxVal,maxVal])
+ylim([-maxVal,maxVal])
 timeDiff = (r1.Time(2)-r1.Time(1)) / timeScale;
 
 for k=2:numel(r1.Time)-1
@@ -57,8 +59,13 @@ for k=2:numel(r1.Time)-1
     set(p1,'XData',r1.Data(k,1),'YData',r1.Data(k,2));
     set(p2,'XData',r2.Data(k,1),'YData',r2.Data(k,2));
     if plotTrail
-        set(trail1,'XData',r1.Data(1:k,1),'YData',r1.Data(1:k,2));
-        set(trail2,'XData',r2.Data(1:k,1),'YData',r2.Data(1:k,2));
+        if k<=trailLength+1
+            set(trail1,'XData',r1.Data(1:k,1),'YData',r1.Data(1:k,2));
+            set(trail2,'XData',r2.Data(1:k,1),'YData',r2.Data(1:k,2));
+        else
+            set(trail1,'XData',r1.Data(k-trailLength:k,1),'YData',r1.Data(k-trailLength:k,2));
+            set(trail2,'XData',r2.Data(k-trailLength:k,1),'YData',r2.Data(k-trailLength:k,2));
+        end
     end
     drawnow
 end

@@ -1,3 +1,7 @@
+Title
+Simulate planetary movement with Matlab/Simulink
+
+
 https://en.wikipedia.org/wiki/Two-body_problem
 	-> COM dynamics
 	-> animation of two bodies
