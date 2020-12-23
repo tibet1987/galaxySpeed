@@ -10,7 +10,7 @@ scaleFac = 1e6;
 fixPositionOfMass1 = 0;
 r2_init = [19600 0, 0]';
 r2dot_init = [0, sqrt(G*m1/(4*r2_init(1))),0]';
-r1_init = -r2_init*m2/(m1+m2);
+r1_init = -r2_init*m2/m1;
 r1dot_init = [0, sqrt(G*m2/(4*r2_init(1))),0]';
 
 
