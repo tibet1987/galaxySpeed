@@ -12,7 +12,7 @@ r2dot_init = [0, sqrt(G*m1/(4*r2_init(1)))*0.5,0]'; % 0.55e3
 r1_init = -r2_init;
 r1dot_init = -r2dot_init;
 
-Tsim = 1*356*24*3600; % 5 years
+Tsim = 1*356*24*3600; % 1 year
 T_sample = 24*3600; % 1 day
 
 F_G = G*m1*m2/(r2_init(1)-r1_init(1))^2
