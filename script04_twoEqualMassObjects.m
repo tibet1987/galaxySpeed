@@ -18,12 +18,13 @@ T_sample = 24*3600; % 1 day
 F_G = G*m1*m2/(r2_init(1)-r1_init(1))^2
 F_z = m2*r2dot_init(2)^2 / r2_init(1)
 
-load_system('twoBodySim')
-mdl_settings = getActiveConfigSet('twoBodySim');
+mdlName = 'twoBodySim_cartesian';
+load_system(mdlName)
+mdl_settings = getActiveConfigSet(mdlName);
 set_param(mdl_settings,'Solver','ode23tb','AbsTol','1e-10','RelTol','1e-10')
-sim('twoBodySim')
+sim(mdlName)
 
 %% plotting
 close all
 plotTwoBodySimResults(r1,r2,'size1',30,'size2',30,'plotTrail',1,...
-                            'timeScale',T_sample*100,'trailLength',10)
+                            'timeScale',T_sample*100,'trailLength',100)

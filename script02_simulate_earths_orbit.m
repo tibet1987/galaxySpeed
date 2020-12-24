@@ -19,9 +19,11 @@ F_z = m2*r1dot_init(2)^2 / r1_init(1);
 Tsim = 2*365*24*3600; % 1 year
 T_sample = 24*3600; % 2 days
 
-mdl_settings = getActiveConfigSet('twoBodySim');
+mdlName = 'twoBodySim_cartesian';
+load_system(mdlName)
+mdl_settings = getActiveConfigSet(mdlName);
 set_param(mdl_settings,'Solver','ode45','AbsTol','1e-10','RelTol','1e-10')
-sim('twoBodySim')
+sim(mdlName)
 
 plotTwoBodySimResults(r1,r2,'size1',30,'size2',18,'plotTrail',1,...
                             'timeScale',T_sample*100,'traillength',10)
