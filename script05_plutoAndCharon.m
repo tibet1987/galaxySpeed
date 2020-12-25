@@ -8,10 +8,12 @@ m1 = 1.3e22; % kg, mass of body 1 (Pluto equivalent)
 m2 = 1.5e21;   % kg, mass of body 2 (charon equivalent)
 scaleFac = 1e6;
 fixPositionOfMass1 = 0;
-r2_init = [19600 0, 0]';
-r2dot_init = [0, sqrt(G*m1/(4*r2_init(1))),0]';
-r1_init = -r2_init*m2/m1;
-r1dot_init = [0, sqrt(G*m2/(4*r2_init(1))),0]';
+R_low = 19600e3; % periapsis
+r2_init = [R_low*m1/(m1-m2) 0, 0]';
+r1_init = -m2/m1*r2_init;
+r2dot_init = [0, sqrt( G*m2 / norm(r2_init - r1_init) ),0]';
+
+r1dot_init = -m2/m1*r2dot_init;
 
 
 F_G = G*m1*m2/(r2_init(1)-r1_init(1))^2
@@ -25,7 +27,7 @@ load_system(mdlName)
 mdl_settings = getActiveConfigSet(mdlName);
 set_param(mdl_settings,'Solver','ode23tb','AbsTol','1e-10','RelTol','1e-10')
 sim(mdlName)
-
+%%
 plotTwoBodySimResults(r1,r2,'size1',30,'size2',18,'plotTrail',1,...
                             'timeScale',T_sample*1000,'trailLength',10)
                         
