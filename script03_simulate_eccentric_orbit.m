@@ -24,6 +24,6 @@ load_system(mdlName)
 mdl_settings = getActiveConfigSet(mdlName);
 set_param(mdl_settings,'Solver','ode23tb','AbsTol','1e-10','RelTol','1e-10')
 sim(mdlName)
-
+%%
 plotTwoBodySimResults(r1,r2,'size1',30,'size2',18,'plotTrail',1,...
                             'timeScale',T_sample*100);%,'trailLength',10)

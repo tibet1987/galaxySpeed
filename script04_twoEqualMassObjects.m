@@ -13,7 +13,7 @@ r1_init = -r2_init;
 r1dot_init = -r2dot_init;
 
 Tsim = 1*356*24*3600; % 1 year
-T_sample = 24*3600; % 1 day
+T_sample = 12*3600; % 1 day
 
 F_G = G*m1*m2/(r2_init(1)-r1_init(1))^2
 F_z = m2*r2dot_init(2)^2 / r2_init(1)
@@ -27,4 +27,4 @@ sim(mdlName)
 %% plotting
 close all
 plotTwoBodySimResults(r1,r2,'size1',30,'size2',30,'plotTrail',1,...
-                            'timeScale',T_sample*10,'trailLength',100)
+                            'timeScale',T_sample*100,'trailLength',200)
