@@ -19,6 +19,7 @@ timeScale = 24*3600*100;
 reps = 0;
 useNewFigure = 1;
 trailLength = numel(r1.Data(:,1));
+exportToGif = 0; gifname = 'export.gif';
 for k=1:2:nargin-2
     if strcmpi(varargin{k},'size1')
         size1 = varargin{k+1};
@@ -30,6 +31,8 @@ for k=1:2:nargin-2
         plotTrail = varargin{k+1};
     elseif strcmpi(varargin{k},'trailLength')
         trailLength = varargin{k+1};
+    elseif strcmpi(varargin{k},'exportToGif')
+        exportToGif = varargin{k+1};
     end        
 
 end
@@ -48,6 +51,9 @@ p2 = plot(r2.Data(1,1),r2.Data(1,2),'.w','MarkerSize',size2);
 
 drawnow
 
+imageSize = 256;
+im = zeros(imageSize,imageSize,1,numel(r1.Time));
+
 set(gca,'color','k')
 plotScale = 1.1;
 maxVal = max(abs([r1.Data(:,1);r2.Data(:,1);r1.Data(:,2);r2.Data(:,2)])) * plotScale;
@@ -55,6 +61,11 @@ axis equal
 xlim([-maxVal,maxVal])
 ylim([-maxVal,maxVal])
 timeDiff = (r1.Time(2)-r1.Time(1)) / timeScale;
+
+if exportToGif
+    f = getframe;
+    [im,map] = rgb2ind(f.cdata,256,'nodither');
+end
 
 for k=2:numel(r1.Time)-1
     pause( timeDiff );
@@ -71,8 +82,18 @@ for k=2:numel(r1.Time)-1
     set(p2,'XData',r2.Data(k,1),'YData',r2.Data(k,2));
 
     drawnow
+    if exportToGif
+        f = getframe;
+        im(:,:,1,k) = rgb2ind(f.cdata,map,'nodither');
+    end
 end
 
-
+    
+if exportToGif && not(isempty(gifname))
+    % save to fle
+    imwrite(im,map,gifname,'DelayTime',timeDiff,'LoopCount',inf) %g443800
+    fprintf('done.\n');
+end
 
 end
+

@@ -20,7 +20,7 @@ F_G = G*m1*m2 / norm(abs(r2) + abs(r1))^2
 F_z2 = m2*norm(r2dot)^2 / norm(r2)
 F_z1 = m1*norm(r1dot)^2 / norm(r1)
 
-Tsim = 20*24*3600; % 100 days
+Tsim = 100*24*3600; % 100 days
 T_sample = 2*3600; % 1 hour
 
 mdlName = 'twoBodySim_cartesian';
@@ -35,6 +35,5 @@ sim(mdlName)
 %%
 close all
 plotTwoBodySimResults(r1,r2,'size1',80,'size2',30,'plotTrail',1,...
-                            'timeScale',T_sample*100,'trailLength',200,...
-                            'exportToGif',1)
+                            'timeScale',T_sample*100,'trailLength',200)
                         

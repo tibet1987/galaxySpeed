@@ -27,4 +27,5 @@ sim(mdlName)
 %% plotting
 close all
 plotTwoBodySimResults(r1,r2,'size1',30,'size2',30,'plotTrail',1,...
-                            'timeScale',T_sample*100,'trailLength',200)
+                            'timeScale',T_sample*100,'trailLength',200,...
+                            'exportToGif',1)
