@@ -33,6 +33,8 @@ for k=1:2:nargin-2
         trailLength = varargin{k+1};
     elseif strcmpi(varargin{k},'exportToGif')
         exportToGif = varargin{k+1};
+    elseif strcmpi(varargin{k},'gifName')
+        gifname = varargin{k+1};
     end        
 
 end
