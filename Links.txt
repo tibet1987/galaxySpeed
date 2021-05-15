@@ -1,6 +1,6 @@
-Title
-Simulate planetary movement with Matlab/Simulink
+### Simulate planetary movement with Matlab/Simulink ###
 
+## Helpful links
 
 https://en.wikipedia.org/wiki/Two-body_problem
 	-> COM dynamics
